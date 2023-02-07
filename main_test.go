@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-var defaultKubeConfig = fmt.Sprintf("tests/kubeconfig", os.Getenv("HOME"))
+var defaultKubeConfig = "tests/kubeconfig"
 
 func helperCommandContext(t *testing.T, ctx context.Context, s ...string) (cmd *exec.Cmd) {
 	cs := []string{"-test.run=TestHelperProcess", "--"}
