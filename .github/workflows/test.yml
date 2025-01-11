@@ -8,14 +8,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest # This is still the host VM, but we'll use a container for the actual steps
-    container: golang:1.16.4-alpine3.13
+    container: mcr.microsoft.com/devcontainers/go:1-1.23-bookworm
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Install dependencies
         run: |
-          apk add --no-cache git make
           go mod download
 
       - name: Run tests
