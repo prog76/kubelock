@@ -1,0 +1,22 @@
+name: Test on Pull Request
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # This is still the host VM, but we'll use a container for the actual steps
+    container: golang:1.16.4-alpine3.13
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          apk add --no-cache git
+          go mod download
+
+      - name: Run tests
+        run: make test
