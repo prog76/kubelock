@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apk add --no-cache git
+          apk add --no-cache git make
           go mod download
 
       - name: Run tests
