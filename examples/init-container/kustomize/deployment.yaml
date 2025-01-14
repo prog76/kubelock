@@ -23,9 +23,9 @@ spec:
         - containerPort: 80
       initContainers:
       - name: database-migrations
-        image: gcr.io/prog76/kubelock/kubelock:latest
+        image: ghcr.io/prog76/kubelock:latest-amd64
         command: ["sh", "-c"]
         args:
           - |
-            kubelock --name example-app --namespace kubelock --lock-value migration-12348 sh -c 'for i in $(seq 1 5); do echo "executing migrations ($i)"; sleep 5; done'
+            kubelock --name example-app --namespace kubelock --lock-value migration-12345 sh -c 'for i in $(seq 1 5); do echo "executing migrations ($i)"; sleep 5; done'
             echo init container done
