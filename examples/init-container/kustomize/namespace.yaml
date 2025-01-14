@@ -1,0 +1,4 @@
+Kind: namespace
+apiVersion: v1
+metadata:
+  name: kubelock

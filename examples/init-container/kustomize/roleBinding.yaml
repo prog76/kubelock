@@ -6,7 +6,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: kubelock
+  name: kubelock-role
 subjects:
 - kind: ServiceAccount
-  name: kubelock
+  name: kubelock-sa
