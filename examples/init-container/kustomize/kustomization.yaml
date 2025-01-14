@@ -8,5 +8,5 @@ resources:
 - deployment.yaml
 - role.yaml
 - roleBinding.yaml
-- service.yaml
 - serviceAccount.yaml
+- namespace.yaml

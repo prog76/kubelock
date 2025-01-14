@@ -26,6 +26,8 @@ Options:
     	The duration that the acting master will retry refreshing leadership before giving up. (default "10s")
   -retry-period string
     	The duration clients should wait between attempts to obtain a lock (default "2s")
+  -lock-value
+  		The value to store with the lock. if set, the specified cmd will only be executed when the value does not match to the current one. if command execution was successfull lock value will be updated.
 ```
 
 Normally you'd just copy the binary from the official image into yours, then you can use as you wish:
