@@ -1,0 +1,8 @@
+FROM alpine:3.13
+
+WORKDIR /app
+
+# Copy the prebuilt binary from the goreleaser build context
+COPY kubelock_v* /app/kubelock
+
+ENTRYPOINT ["/app/kubelock"]

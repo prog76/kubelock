@@ -49,7 +49,7 @@ signs:
   - "${artifact}"
 dockers:
 - image_templates: ["ghcr.io/prog76/{{ .ProjectName }}:{{ .Version }}-amd64"]
-  dockerfile: Dockerfile
+  dockerfile: Dockerfile.goreleaser
   use: buildx
   build_flag_templates:
   - --platform=linux/amd64
