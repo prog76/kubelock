@@ -4,13 +4,14 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"k8s.io/client-go/tools/leaderelection"
 	"os"
 	"os/exec"
 	"reflect"
 	"strconv"
 	"testing"
 	"time"
+
+	"k8s.io/client-go/tools/leaderelection"
 )
 
 var defaultKubeConfig = "tests/kubeconfig"
@@ -32,7 +33,7 @@ func helperCommand(t *testing.T, s ...string) *exec.Cmd {
 }
 
 func TestProcessArgs(t *testing.T) {
-	flag.Set("v", "10")
+	flag.Set("log-level", "debug")
 	var tests = []struct {
 		Name        string
 		args        []string
@@ -75,7 +76,13 @@ func TestKubeSetup(t *testing.T) {
 func setupLeaderElect(t *testing.T, err *error, args ...string) (leaderelection.LeaderCallbacks, context.Context) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cmd := helperCommandContext(t, ctx, args...)
-	cb := getLeaderCallbacks(cmd, err, ctx, cancel)
+	cb := getLeaderCallbacks(ctx, cancel,
+		func () {
+			cmdExecutor(cmd, err)
+		},
+		func() (bool) {
+			return false
+		})
 	return cb, ctx
 }
 
