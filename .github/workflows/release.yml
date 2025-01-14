@@ -33,7 +33,13 @@ jobs:
         uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSWORD }}        
+          passphrase: ${{ secrets.GPG_PASSWORD }}
+      - name: Docker Login
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_PAT }}
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:

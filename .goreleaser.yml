@@ -47,6 +47,21 @@ signs:
   - "${signature}"
   - "--detach-sign"
   - "${artifact}"
+dockers:
+- image_templates: ["ghcr.io/prog76/{{ .ProjectName }}:{{ .Version }}-amd64"]
+  dockerfile: Dockerfile
+  use: buildx
+  build_flag_templates:
+  - --platform=linux/amd64
+  - --label=org.opencontainers.image.created={{.Date}}
+  - --label=org.opencontainers.image.revision={{.FullCommit}}
+  - --label=org.opencontainers.image.title={{ .ProjectName }}
+  - --label=org.opencontainers.image.description={{ .ProjectName }}
+  - --label=org.opencontainers.image.url=https://github.com/prog76/{{ .ProjectName }}
+  - --label=org.opencontainers.image.source=https://github.com/prog76/{{ .ProjectName }}
+  - --label=org.opencontainers.image.version={{ .Version }}
+  goos: linux
+  goarch: amd64
 release:
 # If you want to manually examine the release before its live, uncomment this line:
 # draft: true
