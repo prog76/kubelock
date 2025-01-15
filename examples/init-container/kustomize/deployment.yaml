@@ -19,13 +19,14 @@ spec:
       containers:
       - name: nginx
         image: nginx
-        ports:
-        - containerPort: 80
       initContainers:
       - name: database-migrations
-        image: ghcr.io/prog76/kubelock:latest-amd64
+        env:
+        - name: LOCKVALUE
+          value: "database-migrations-12345"
+        image: ghcr.io/prog76/kubelock:0.0.2-amd64
         command: ["sh", "-c"]
         args:
           - |
-            kubelock --name example-app --namespace kubelock --lock-value migration-12345 sh -c 'for i in $(seq 1 5); do echo "executing migrations ($i)"; sleep 5; done'
+            kubelock --name example-app --namespace kubelock --lock-value $LOCKVALUE sh -c 'for i in $(seq 1 5); do echo "executing migrations ($i)"; sleep 5; done'
             echo init container done
