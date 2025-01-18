@@ -376,7 +376,7 @@ func main() {
 	var subprocessErr error
 	is_done :=func() (bool) {
 		if args.lockValue == "" {
-			return true
+			return false
 		}
 		annotations, _, err := getEndpointAnnotations(kc.lock.Client, kc.lock.LeaseMeta, context.TODO())
 		if err != nil {
